@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "./murr/cmd/get_tips"
+
+exit Murr::Cmd::GetTips.new.call(ARGV)
