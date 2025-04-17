@@ -32,6 +32,10 @@ module Murr
             options[:merchant_code] = merchant
           end
 
+          opts.on("-a", "--days-ago DAYS", "Show data from former days") do |days_ago|
+            options[:days_ago] = days_ago
+          end
+
           opts.on("-d", "--debug", "Debug mode") do
             options[:debug] = true
 
@@ -54,7 +58,7 @@ module Murr
 
         return options[:early_exit] if options[:early_exit]
 
-        tips = transaction_list.map do |tx|
+        tips = transaction_list(days_ago(options[:days_ago])).map do |tx|
           tx = transaction(tx.id)
           [tx.timestamp.getlocal, tx.tip_amount, tip_percent(tx), tx.currency]
         end.group_by { |a| a[0].hour }
@@ -89,10 +93,11 @@ module Murr
         @api_instance ||= OpenapiClient::TransactionsApi.new
       end
 
-      def transaction_list
+      def transaction_list(t = Time.now)
         opts = {
-          oldest_time: oldest_time.iso8601,
-          newest_time: newest_time.iso8601,
+          oldest_time: workday_start(t).iso8601,
+          newest_time: workday_end(t).iso8601,
+          limit: 100,
           statuses: ['SUCCESSFUL']
           }
 
@@ -103,16 +108,28 @@ module Murr
         api_instance.get_transaction_v2_1(options[:merchant_code], { id: id })
       end
 
-      def oldest_time
-        newest_time - (60 * 60 * 24)
-      end
-     
       def tip_percent(tx)
         tx.tip_amount/(tx.amount - tx.tip_amount) * 100
       end
 
-      def newest_time
-        Time.now
+      def workday_start(t = Time.now)
+        offset = days(t.hour < 5 ? 1 : 0)
+        t -= offset
+        Time.new(t.year, t.month, t.day, 5)
+      end
+
+      def workday_end(t = Time.now)
+        offset = days(t.hour < 5 ? 0 : 1)
+        t += offset
+        Time.new(t.year, t.month, t.day, 5)
+      end
+
+      def days_ago(n = 0)
+        Time.now - days(n.to_i)
+      end
+
+      def days(n = 0)
+        n * 24 * 60 * 60
       end
     end
   end
