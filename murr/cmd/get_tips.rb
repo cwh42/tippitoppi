@@ -56,17 +56,21 @@ module Murr
 
         tips = transaction_list.map do |tx|
           tx = transaction(tx.id)
-          percent = tx.tip_amount/(tx.amount - tx.tip_amount) * 100
-          [tx.timestamp.getlocal, tx.amount, tx.tip_amount, percent, tx.currency]
+          [tx.timestamp.getlocal, tx.tip_amount, tip_percent(tx), tx.currency]
         end.group_by { |a| a[0].hour }
+
+        sum = 0
 
         tips.each do |h,a|
           a.each do |t|
-            puts "%s: %6.2f #{t[4]} %6.2f #{t[4]} %5.2f%%" % t
+            sum += t[1]
+            puts "%s: %6.2f #{t[3]} %2.0f %%" % t
           end
-          puts '%44.2f EUR' % a.sum { |t| t[2] }
-          puts '-' * 6
+          puts '%33.2f EUR' % a.sum { |t| t[1] }
+          puts '-' * 41
         end
+
+        puts '%33.2f EUR' % sum
 
         0
       rescue OpenapiClient::ApiError => e
@@ -101,6 +105,10 @@ module Murr
 
       def oldest_time
         newest_time - (60 * 60 * 24)
+      end
+     
+      def tip_percent(tx)
+        tx.tip_amount/(tx.amount - tx.tip_amount) * 100
       end
 
       def newest_time
