@@ -1,0 +1,20 @@
+<h1>Transactions</h1>
+
+<% if @transactions.none? %>
+  <div>
+    Noch nix :(
+  </div>
+<% else %>
+  <table id="transactions">
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td>
+          <%= transaction.timestamp %>
+        </td>
+        <td>
+          <%= transaction.tip_amount %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
