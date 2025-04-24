@@ -9,10 +9,13 @@
     <% @transactions.each do |transaction| %>
       <tr>
         <td>
-          <%= transaction.timestamp %>
+          <%= l transaction.timestamp.localtime, format: :short %>
         </td>
         <td>
-          <%= transaction.tip_amount %>
+          <%= number_to_currency transaction.tip_amount, locale: :de %>
+        </td>
+        <td>
+          <%= number_to_percentage transaction.tip_percent, precision: 0 %>
         </td>
       </tr>
     <% end %>
