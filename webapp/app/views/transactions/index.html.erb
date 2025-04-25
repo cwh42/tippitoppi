@@ -6,18 +6,43 @@
   </div>
 <% else %>
   <table id="transactions">
-    <% @transactions.each do |transaction| %>
+    <thead>
       <tr>
-        <td>
-          <%= l transaction.timestamp.localtime, format: :short %>
-        </td>
-        <td>
-          <%= number_to_currency transaction.tip_amount, locale: :de %>
-        </td>
-        <td>
-          <%= number_to_percentage transaction.tip_percent, precision: 0 %>
-        </td>
+        <th>Time</th>
+        <th>Tip</th>
+        <th>Percentage</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @transactions.group_by { |tx| tx.timestamp.localtime.hour }.each do |g, transactions| %>
+        <tr>
+          <th colspan="3">
+            <%= "#{g} Uhr" %>
+          </td>
+        </tr>
+        <% transactions.each do |transaction| %>
+          <tr>
+            <td>
+              <%= transaction.timestamp.localtime.to_fs(:time) %>
+            </td>
+            <td>
+              <%= number_to_currency transaction.tip_amount, locale: :de %>
+            </td>
+            <td>
+              <%= number_to_percentage transaction.tip_percent, precision: 0 %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td>
+            <b>
+              <%= number_to_currency transactions.sum { |t| t.tip_amount }, locale: :de %>
+            </b>
+          </td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 <% end %>

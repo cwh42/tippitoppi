@@ -22,6 +22,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <%= link_to "Home", root_path %>
+    </nav>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
