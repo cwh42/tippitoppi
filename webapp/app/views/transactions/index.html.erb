@@ -6,7 +6,7 @@
   </li>
   <% (@date.beginning_of_week..@date.end_of_week).each do |day| %>
     <li>
-      <%= link_to time_tag(day), transactions_path(date: day) %>
+      <%= link_to time_tag(day, l(day, format: :long)), transactions_path(date: day) %>
     </li>
   <% end %>
   <li>
@@ -14,7 +14,7 @@
   </li>
 </ul>
 
-<h2><%= time_tag @date %></h2>
+<h2><%= time_tag @date, l(@date, format: :long) %></h2>
 
 <% if @transactions.none? %>
   <div>
@@ -59,6 +59,15 @@
           <td></td>
         </tr>
       <% end %>
+      <tr>
+        <td><b>Gesamt:</b></td>
+        <td>
+          <b>
+            <%= number_to_currency @transactions.sum { |t| t.tip_amount }, locale: :de %>
+          </b>
+        </td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 <% end %>
