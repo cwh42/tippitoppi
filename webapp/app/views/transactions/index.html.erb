@@ -1,5 +1,21 @@
 <h1>Transactions</h1>
 
+<ul>
+  <li>
+    <%= link_to '<<', transactions_path(date: @date.beginning_of_week.yesterday) %>
+  </li>
+  <% (@date.beginning_of_week..@date.end_of_week).each do |day| %>
+    <li>
+      <%= link_to time_tag(day), transactions_path(date: day) %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to '>>', transactions_path(date: @date.end_of_week.tomorrow) %>
+  </li>
+</ul>
+
+<h2><%= time_tag @date %></h2>
+
 <% if @transactions.none? %>
   <div>
     Noch nix :(

@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   def index
-    @transactions = Transaction.sync
+    @date = params[:date].to_date || Time.zone.today
+    @transactions = Transaction.sync(@date)
   end
 end
