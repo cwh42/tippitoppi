@@ -19,7 +19,7 @@ module OpenapiClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Get operator
+    # Retrieve an operator
     # Returns specific operator.
     # @param operator_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module OpenapiClient
       data
     end
 
-    # Get operator
+    # Retrieve an operator
     # Returns specific operator.
     # @param operator_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -82,7 +82,7 @@ module OpenapiClient
       return data, status_code, headers
     end
 
-    # Create operator.
+    # Create an operator
     # Creates new operator for currently authorized users' merchant.
     # @param create_sub_account_request [CreateSubAccountRequest] 
     # @param [Hash] opts the optional parameters
@@ -92,7 +92,7 @@ module OpenapiClient
       data
     end
 
-    # Create operator.
+    # Create an operator
     # Creates new operator for currently authorized users&#39; merchant.
     # @param create_sub_account_request [CreateSubAccountRequest] 
     # @param [Hash] opts the optional parameters
@@ -150,7 +150,7 @@ module OpenapiClient
       return data, status_code, headers
     end
 
-    # Disable operator.
+    # Disable an operator
     # @param operator_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [Operator]
@@ -159,7 +159,7 @@ module OpenapiClient
       data
     end
 
-    # Disable operator.
+    # Disable an operator
     # @param operator_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Operator, Integer, Hash)>] Operator data, response status code and response headers
@@ -211,7 +211,7 @@ module OpenapiClient
       return data, status_code, headers
     end
 
-    # List operators.
+    # List operators
     # Returns list of operators for currently authorized user's merchant.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :query Search query used to filter users that match given query term.  Current implementation allow querying only over the email address. All operators whos email address contains the query string are returned. 
@@ -222,7 +222,7 @@ module OpenapiClient
       data
     end
 
-    # List operators.
+    # List operators
     # Returns list of operators for currently authorized user&#39;s merchant.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :query Search query used to filter users that match given query term.  Current implementation allow querying only over the email address. All operators whos email address contains the query string are returned. 
@@ -274,7 +274,7 @@ module OpenapiClient
       return data, status_code, headers
     end
 
-    # Update operator.
+    # Update an operator
     # Updates operator. If the operator was disabled and their password is updated they will be unblocked.
     # @param operator_id [Integer] 
     # @param update_sub_account_request [UpdateSubAccountRequest] 
@@ -285,7 +285,7 @@ module OpenapiClient
       data
     end
 
-    # Update operator.
+    # Update an operator
     # Updates operator. If the operator was disabled and their password is updated they will be unblocked.
     # @param operator_id [Integer] 
     # @param update_sub_account_request [UpdateSubAccountRequest] 

@@ -138,11 +138,11 @@ Class | Method | HTTP request | Description
 *OpenapiClient::RolesApi* | [**get_merchant_role**](docs/RolesApi.md#get_merchant_role) | **GET** /v0.1/merchants/{merchant_code}/roles/{role_id} | Retrieve a role
 *OpenapiClient::RolesApi* | [**list_merchant_roles**](docs/RolesApi.md#list_merchant_roles) | **GET** /v0.1/merchants/{merchant_code}/roles | List roles
 *OpenapiClient::RolesApi* | [**update_merchant_role**](docs/RolesApi.md#update_merchant_role) | **PATCH** /v0.1/merchants/{merchant_code}/roles/{role_id} | Update a role
-*OpenapiClient::SubaccountsApi* | [**compat_get_operator**](docs/SubaccountsApi.md#compat_get_operator) | **GET** /v0.1/me/accounts/{operator_id} | Get operator
-*OpenapiClient::SubaccountsApi* | [**create_sub_account**](docs/SubaccountsApi.md#create_sub_account) | **POST** /v0.1/me/accounts | Create operator.
-*OpenapiClient::SubaccountsApi* | [**deactivate_sub_account**](docs/SubaccountsApi.md#deactivate_sub_account) | **DELETE** /v0.1/me/accounts/{operator_id} | Disable operator.
-*OpenapiClient::SubaccountsApi* | [**list_sub_accounts**](docs/SubaccountsApi.md#list_sub_accounts) | **GET** /v0.1/me/accounts | List operators.
-*OpenapiClient::SubaccountsApi* | [**update_sub_account**](docs/SubaccountsApi.md#update_sub_account) | **PUT** /v0.1/me/accounts/{operator_id} | Update operator.
+*OpenapiClient::SubaccountsApi* | [**compat_get_operator**](docs/SubaccountsApi.md#compat_get_operator) | **GET** /v0.1/me/accounts/{operator_id} | Retrieve an operator
+*OpenapiClient::SubaccountsApi* | [**create_sub_account**](docs/SubaccountsApi.md#create_sub_account) | **POST** /v0.1/me/accounts | Create an operator
+*OpenapiClient::SubaccountsApi* | [**deactivate_sub_account**](docs/SubaccountsApi.md#deactivate_sub_account) | **DELETE** /v0.1/me/accounts/{operator_id} | Disable an operator
+*OpenapiClient::SubaccountsApi* | [**list_sub_accounts**](docs/SubaccountsApi.md#list_sub_accounts) | **GET** /v0.1/me/accounts | List operators
+*OpenapiClient::SubaccountsApi* | [**update_sub_account**](docs/SubaccountsApi.md#update_sub_account) | **PUT** /v0.1/me/accounts/{operator_id} | Update an operator
 *OpenapiClient::TransactionsApi* | [**get_transaction**](docs/TransactionsApi.md#get_transaction) | **GET** /v0.1/me/transactions | Retrieve a transaction
 *OpenapiClient::TransactionsApi* | [**get_transaction_v2_1**](docs/TransactionsApi.md#get_transaction_v2_1) | **GET** /v2.1/merchants/{merchant_code}/transactions | Retrieve a transaction
 *OpenapiClient::TransactionsApi* | [**list_transactions**](docs/TransactionsApi.md#list_transactions) | **GET** /v0.1/me/transactions/history | List transactions

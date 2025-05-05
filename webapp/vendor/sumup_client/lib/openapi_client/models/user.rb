@@ -34,7 +34,7 @@ module OpenapiClient
     # True if the End-User's e-mail address has been verified; otherwise false. When this Claim Value is true, this means that the we took affirmative steps to ensure that this e-mail address was controlled by the End-User at the time the verification was performed. 
     attr_accessor :email_verified
 
-    # End-User's preferred telephone number in E.164 [E.164] format. For example, +1 (425) 555-1212 or +56 (2) 687 2400. Can be empty if the user doesn't have phone number set.
+    # End-User's preferred telephone number in [E.164](https://en.wikipedia.org/wiki/E.164) format. For example, +1 (425) 555-1212 or +56 (2) 687 2400. Can be empty if the user doesn't have phone number set.
     attr_accessor :phone_number
 
     # True if the End-User's phone number has been verified; otherwise false. When this Claim Value is true, this means that we took affirmative steps to ensure that this phone number was controlled by the End-User at the time the verification was performed. 

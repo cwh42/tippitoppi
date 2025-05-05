@@ -481,7 +481,7 @@ end
 
 ## update_reader
 
-> update_reader(merchant_code, id, update_reader_request)
+> <Reader> update_reader(merchant_code, id, update_reader_request)
 
 Update a Reader
 
@@ -511,7 +511,8 @@ update_reader_request = OpenapiClient::UpdateReaderRequest.new # UpdateReaderReq
 
 begin
   # Update a Reader
-  api_instance.update_reader(merchant_code, id, update_reader_request)
+  result = api_instance.update_reader(merchant_code, id, update_reader_request)
+  p result
 rescue OpenapiClient::ApiError => e
   puts "Error when calling ReadersApi->update_reader: #{e}"
 end
@@ -519,9 +520,9 @@ end
 
 #### Using the update_reader_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> update_reader_with_http_info(merchant_code, id, update_reader_request)
+> <Array(<Reader>, Integer, Hash)> update_reader_with_http_info(merchant_code, id, update_reader_request)
 
 ```ruby
 begin
@@ -529,7 +530,7 @@ begin
   data, status_code, headers = api_instance.update_reader_with_http_info(merchant_code, id, update_reader_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <Reader>
 rescue OpenapiClient::ApiError => e
   puts "Error when calling ReadersApi->update_reader_with_http_info: #{e}"
 end
@@ -545,7 +546,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**Reader**](Reader.md)
 
 ### Authorization
 
@@ -554,5 +555,5 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 

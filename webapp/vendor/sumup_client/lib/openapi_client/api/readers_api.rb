@@ -478,10 +478,10 @@ module OpenapiClient
     # @param id [String] The unique identifier of the reader.
     # @param update_reader_request [UpdateReaderRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Reader]
     def update_reader(merchant_code, id, update_reader_request, opts = {})
-      update_reader_with_http_info(merchant_code, id, update_reader_request, opts)
-      nil
+      data, _status_code, _headers = update_reader_with_http_info(merchant_code, id, update_reader_request, opts)
+      data
     end
 
     # Update a Reader
@@ -490,7 +490,7 @@ module OpenapiClient
     # @param id [String] The unique identifier of the reader.
     # @param update_reader_request [UpdateReaderRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(Reader, Integer, Hash)>] Reader data, response status code and response headers
     def update_reader_with_http_info(merchant_code, id, update_reader_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ReadersApi.update_reader ...'
@@ -523,6 +523,8 @@ module OpenapiClient
 
       # header parameters
       header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
@@ -536,7 +538,7 @@ module OpenapiClient
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_reader_request)
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'Reader'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['apiKey', 'oauth2', 'oauth2']

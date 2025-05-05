@@ -4,18 +4,18 @@ All URIs are relative to *https://api.sumup.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**compat_get_operator**](SubaccountsApi.md#compat_get_operator) | **GET** /v0.1/me/accounts/{operator_id} | Get operator |
-| [**create_sub_account**](SubaccountsApi.md#create_sub_account) | **POST** /v0.1/me/accounts | Create operator. |
-| [**deactivate_sub_account**](SubaccountsApi.md#deactivate_sub_account) | **DELETE** /v0.1/me/accounts/{operator_id} | Disable operator. |
-| [**list_sub_accounts**](SubaccountsApi.md#list_sub_accounts) | **GET** /v0.1/me/accounts | List operators. |
-| [**update_sub_account**](SubaccountsApi.md#update_sub_account) | **PUT** /v0.1/me/accounts/{operator_id} | Update operator. |
+| [**compat_get_operator**](SubaccountsApi.md#compat_get_operator) | **GET** /v0.1/me/accounts/{operator_id} | Retrieve an operator |
+| [**create_sub_account**](SubaccountsApi.md#create_sub_account) | **POST** /v0.1/me/accounts | Create an operator |
+| [**deactivate_sub_account**](SubaccountsApi.md#deactivate_sub_account) | **DELETE** /v0.1/me/accounts/{operator_id} | Disable an operator |
+| [**list_sub_accounts**](SubaccountsApi.md#list_sub_accounts) | **GET** /v0.1/me/accounts | List operators |
+| [**update_sub_account**](SubaccountsApi.md#update_sub_account) | **PUT** /v0.1/me/accounts/{operator_id} | Update an operator |
 
 
 ## compat_get_operator
 
 > <Operator> compat_get_operator(operator_id)
 
-Get operator
+Retrieve an operator
 
 Returns specific operator.
 
@@ -40,7 +40,7 @@ api_instance = OpenapiClient::SubaccountsApi.new
 operator_id = 56 # Integer | 
 
 begin
-  # Get operator
+  # Retrieve an operator
   result = api_instance.compat_get_operator(operator_id)
   p result
 rescue OpenapiClient::ApiError => e
@@ -56,7 +56,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get operator
+  # Retrieve an operator
   data, status_code, headers = api_instance.compat_get_operator_with_http_info(operator_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -90,7 +90,7 @@ end
 
 > <Operator> create_sub_account(create_sub_account_request)
 
-Create operator.
+Create an operator
 
 Creates new operator for currently authorized users' merchant.
 
@@ -115,7 +115,7 @@ api_instance = OpenapiClient::SubaccountsApi.new
 create_sub_account_request = OpenapiClient::CreateSubAccountRequest.new({username: 'operator1@mydomain.com', password: 'correct horse batter staple'}) # CreateSubAccountRequest | 
 
 begin
-  # Create operator.
+  # Create an operator
   result = api_instance.create_sub_account(create_sub_account_request)
   p result
 rescue OpenapiClient::ApiError => e
@@ -131,7 +131,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create operator.
+  # Create an operator
   data, status_code, headers = api_instance.create_sub_account_with_http_info(create_sub_account_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -165,7 +165,7 @@ end
 
 > <Operator> deactivate_sub_account(operator_id)
 
-Disable operator.
+Disable an operator
 
 ### Examples
 
@@ -188,7 +188,7 @@ api_instance = OpenapiClient::SubaccountsApi.new
 operator_id = 56 # Integer | 
 
 begin
-  # Disable operator.
+  # Disable an operator
   result = api_instance.deactivate_sub_account(operator_id)
   p result
 rescue OpenapiClient::ApiError => e
@@ -204,7 +204,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Disable operator.
+  # Disable an operator
   data, status_code, headers = api_instance.deactivate_sub_account_with_http_info(operator_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -238,7 +238,7 @@ end
 
 > <Array<Operator>> list_sub_accounts(opts)
 
-List operators.
+List operators
 
 Returns list of operators for currently authorized user's merchant.
 
@@ -266,7 +266,7 @@ opts = {
 }
 
 begin
-  # List operators.
+  # List operators
   result = api_instance.list_sub_accounts(opts)
   p result
 rescue OpenapiClient::ApiError => e
@@ -282,7 +282,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List operators.
+  # List operators
   data, status_code, headers = api_instance.list_sub_accounts_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -317,7 +317,7 @@ end
 
 > <Operator> update_sub_account(operator_id, update_sub_account_request)
 
-Update operator.
+Update an operator
 
 Updates operator. If the operator was disabled and their password is updated they will be unblocked.
 
@@ -343,7 +343,7 @@ operator_id = 56 # Integer |
 update_sub_account_request = OpenapiClient::UpdateSubAccountRequest.new # UpdateSubAccountRequest | 
 
 begin
-  # Update operator.
+  # Update an operator
   result = api_instance.update_sub_account(operator_id, update_sub_account_request)
   p result
 rescue OpenapiClient::ApiError => e
@@ -359,7 +359,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update operator.
+  # Update an operator
   data, status_code, headers = api_instance.update_sub_account_with_http_info(operator_id, update_sub_account_request)
   p status_code # => 2xx
   p headers # => { ... }

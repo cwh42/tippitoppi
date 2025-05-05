@@ -21,10 +21,11 @@ module OpenapiClient
     REFUNDED = "REFUNDED".freeze
     SUCCESSFUL = "SUCCESSFUL".freeze
     PAID_OUT = "PAID_OUT".freeze
+    PAYOUT_CREATED = "PAYOUT_CREATED".freeze
     RECONCILED = "RECONCILED".freeze
 
     def self.all_vars
-      @all_vars ||= [PENDING, SCHEDULED, FAILED, REFUNDED, SUCCESSFUL, PAID_OUT, RECONCILED].freeze
+      @all_vars ||= [PENDING, SCHEDULED, FAILED, REFUNDED, SUCCESSFUL, PAID_OUT, PAYOUT_CREATED, RECONCILED].freeze
     end
 
     # Builds the enum from string
