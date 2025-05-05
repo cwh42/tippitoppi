@@ -6,12 +6,12 @@ class TransactionSyncService
     @api_instance = ::OpenapiClient::TransactionsApi.new
   end
 
-  def sync(merchant_code: Rails.application.credentials.sumup.merchant_code)
+  def sync(merchant_code: Rails.application.credentials.sumup.merchant_code, date: Time.zone.today)
     raise ArgumentError, "No default merchant_code configured" if merchant_code.blank?
 
     @merchant_code = merchant_code
 
-    transaction_list.map do |tx|
+    transaction_list(date).map do |tx|
       tx = transaction(tx.id)
       Transaction.find_or_create_by(upstream_id: tx.id) do |t|
         t.amount = tx.amount
@@ -23,10 +23,10 @@ class TransactionSyncService
 
   private
 
-  def transaction_list(t = Time.now)
+  def transaction_list(date = Time.zone.today)
     opts = {
-      oldest_time: workday_start(t).iso8601,
-      newest_time: workday_end(t).iso8601,
+      oldest_time: date.beginning_of_workday.iso8601,
+      newest_time: date.end_of_workday.iso8601,
       limit: 100,
       statuses: [ "SUCCESSFUL" ]
     }
@@ -36,17 +36,5 @@ class TransactionSyncService
 
   def transaction(id)
     api_instance.get_transaction_v2_1(merchant_code, { id: id })
-  end
-
-  def workday_start(t = Time.now)
-    offset = t.hour < 5 ? 1 : 0
-    t -= offset.days
-    Time.new(t.year, t.month, t.day, 5)
-  end
-
-  def workday_end(t = Time.now)
-    offset = t.hour < 5 ? 0 : 1
-    t += offset.days
-    Time.new(t.year, t.month, t.day, 5)
   end
 end
