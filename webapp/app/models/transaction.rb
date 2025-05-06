@@ -6,11 +6,13 @@ class Transaction < ApplicationRecord
   scope :today, -> { date(Time.zone.today) }
 
   def tip_percent
+    return 0 if amount.zero?
     tip_amount/(amount - tip_amount) * 100
   end
 
   def self.tip_percent
     amount = sum { |t| t.amount }
+    return 0 if amount.zero?
     tip_amount = sum { |t| t.tip_amount }
     tip_amount/(amount - tip_amount) * 100
   end
