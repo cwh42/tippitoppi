@@ -2,8 +2,8 @@ class Transaction < ApplicationRecord
   validates :upstream_id, uniqueness: true
   validates :upstream_id, :amount, :tip_amount, :timestamp, presence: true
 
-  scope :date, ->(date) { where(timestamp: date&.to_date.beginning_of_workday..date&.to_date.end_of_workday) }
-  scope :today, -> { date(Time.zone.today) }
+  scope :at_date, ->(date) { where(timestamp: date&.to_date.beginning_of_workday..date&.to_date.end_of_workday) }
+  scope :today, -> { at_date(Time.zone.today) }
 
   def workers
     Worktime.at_time(timestamp)
