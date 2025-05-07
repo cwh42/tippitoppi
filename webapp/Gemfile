@@ -41,6 +41,8 @@ gem "openapi_client", "~> 1.0", path: "./vendor/sumup_client"
 
 gem "csv"
 
+gem "terminal-table"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
