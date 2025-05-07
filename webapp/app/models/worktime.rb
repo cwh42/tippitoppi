@@ -7,7 +7,7 @@ class Worktime < ApplicationRecord
   scope :today, -> { at_date(Time.zone.today) }
 
   def self.names
-    all.pluck(:name).uniq
+    all.order(:start_time).pluck(:name).uniq
   end
 
   def self.name_size
