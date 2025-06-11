@@ -86,6 +86,9 @@ namespace :export do
       shared.each_pair do |n,a|
          t << [n, number_to_currency(a, locale: :de)]
       end
+
+      t << :separator
+      t << ['Summe:', number_to_currency(shared.sum {|k,v| v}, locale: :de)]
     end
 
     puts table
