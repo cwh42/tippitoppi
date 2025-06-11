@@ -65,4 +65,29 @@ namespace :export do
     puts "  pdfunite *.pdf ../Trinkgeldverteilung-2024-12-10-2025-05-06.pdf"
     puts "to convert to PDF."
   end
+
+  desc 'aggregate date range'
+  task :aggregate, %i[from to] => :environment do |_t, args|
+    args.with_defaults(from: Date.today.beginning_of_week, to: Date.today)
+
+    include ActionView::Helpers
+    #args.date == 'all' ?
+    from = args.from&.to_date
+    to = args.to&.to_date
+    date_range = (from..to)
+
+    table_headings = %w[Name Trinkgeld]
+    table_opts = { title: "#{I18n.l(from, format: :long)} – #{I18n.l(to, format: :long)}",
+                   headings: table_headings,
+                   style: { alignment: :right } }
+
+    table = Terminal::Table.new(table_opts) do |t|
+      shared = Transaction.where(timestamp: date_range).share
+      shared.each_pair do |n,a|
+         t << [n, number_to_currency(a, locale: :de)]
+      end
+    end
+
+    puts table
+  end
 end
