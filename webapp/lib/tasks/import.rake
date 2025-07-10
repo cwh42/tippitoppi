@@ -15,4 +15,9 @@ namespace :import do
       puts wt
     end
   end
+
+  desc "Sync SumUp Transactions"
+  task sumup: :environment do
+    (Transaction.last.timestamp.to_date..Time.zone.now).each { |d| Transaction.sync(d) }
+  end
 end
