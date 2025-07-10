@@ -12,7 +12,7 @@ class Transaction < ApplicationRecord
 
   def share
     tip = tip_amount / workers.size
-    workers.to_h {|w| [w.name, tip] }
+    workers.to_h { |w| [ w.name, tip ] }
   end
 
   def self.share

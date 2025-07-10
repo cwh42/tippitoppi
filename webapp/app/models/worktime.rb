@@ -1,8 +1,8 @@
 class Worktime < ApplicationRecord
-  validates :name, presence: true, :uniqueness => { :scope => [:start_time, :end_time] }
+  validates :name, presence: true, uniqueness: { scope: [ :start_time, :end_time ] }
 
-  scope :at_time, ->(time) { where('? BETWEEN start_time AND end_time', time) }
-  scope :at_date, ->(date) { where('date(start_time) = ?', date&.to_date) }
+  scope :at_time, ->(time) { where("? BETWEEN start_time AND end_time", time) }
+  scope :at_date, ->(date) { where("date(start_time) = ?", date&.to_date) }
   scope :yesterday, -> { at_date(Time.zone.yesterday) }
   scope :today, -> { at_date(Time.zone.today) }
 
@@ -16,8 +16,8 @@ class Worktime < ApplicationRecord
 
   def to_s
     name_size = Worktime.name_size
-    pause_str = pause.zero? ? '-' : "-(P: #{(pause / 60.0).round(2)} h)-"
-    "%#{name_size}s: %s %s %s ≙ %.2f h" % [name, I18n.l(start_time), pause_str, I18n.l(end_time), hours]
+    pause_str = pause.zero? ? "-" : "-(P: #{(pause / 60.0).round(2)} h)-"
+    "%#{name_size}s: %s %s %s ≙ %.2f h" % [ name, I18n.l(start_time), pause_str, I18n.l(end_time), hours ]
   end
 
   def hours

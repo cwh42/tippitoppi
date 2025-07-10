@@ -23,7 +23,7 @@ module Tippitoppi
     #
     config.time_zone = "Berlin"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.i18n.available_locales = [:en, :de]
+    config.i18n.available_locales = [ :en, :de ]
     config.i18n.default_locale = :de
 
     config.export_dir = Rails.root.join("storage").join("export")
