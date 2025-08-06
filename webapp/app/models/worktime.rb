@@ -1,5 +1,6 @@
 class Worktime < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: [ :start_time, :end_time ] }
+  validate :end_time_later_than_start_time
 
   scope :at_time, ->(time) { where("? BETWEEN start_time AND end_time", time) }
   scope :at_date, ->(date) { where("date(start_time) = ?", date&.to_date) }
@@ -12,6 +13,12 @@ class Worktime < ApplicationRecord
 
   def self.name_size
     names.compact.max_by { |n| n.size }.size
+  end
+
+  def end_time_later_than_start_time
+    unless end_time > start_time
+      errors.add(:end_time, "#{name} forgot to clock out")
+    end
   end
 
   def to_s
