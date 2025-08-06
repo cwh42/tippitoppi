@@ -39,20 +39,32 @@ namespace :export do
   end
 
   desc "print to STDOUT"
-  task :print, %i[date] => :environment do |_t, args|
-    args.with_defaults(date: Date.today)
+  task :print, %i[from to] => :environment do |_t, args|
+    args.with_defaults(from: Date.today)
+    args.with_defaults(to: args.from)
 
-    dates = args.date == "all" ? Date.new(2024, 12, 10)..Date.today : [ args.date&.to_date ]
+    if args.from == "all"
+      dates =  Date.new(2024, 12, 10)..Date.today
+    else
+      dates = args.from&.to_date..args.to&.to_date
+    end
+
     dates.each do |d|
       puts mktable(d)
     end
   end
 
   desc "Export to text"
-  task :text, %i[date] => :environment do |_t, args|
-    args.with_defaults(date: Date.today)
+  task :text, %i[from to] => :environment do |_t, args|
+    args.with_defaults(from: Date.today)
+    args.with_defaults(to: args.from)
 
-    dates = args.date == "all" ? Date.new(2024, 12, 10)..Date.today : [ args.date&.to_date ]
+    if args.from == "all"
+      dates =  Date.new(2024, 12, 10)..Date.today
+    else
+      dates = args.from&.to_date..args.to&.to_date
+    end
+
     dates.each do |d|
       filename = Rails.configuration.export_dir.join("#{d}.txt")
       puts "Writing #{filename}"
