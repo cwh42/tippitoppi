@@ -1,0 +1,35 @@
+<h2>Verteilung</h2>
+
+<% if @table.none? %>
+  <div>
+    Leider nix :(
+  </div>
+<% else %>
+  <table id="share">
+    <thead>
+      <tr>
+        <% @table_headings.each do |th| %>
+          <th><%= th %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @table.each do |tr| %>
+        <tr>
+          <% tr.each do |td| %>
+            <td>
+              <%= td %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+    <thead>
+      <tr>
+        <% @table_headings.each do |th| %>
+          <th><%= th %></th>
+        <% end %>
+      </tr>
+    </thead>
+  </table>
+<% end %>

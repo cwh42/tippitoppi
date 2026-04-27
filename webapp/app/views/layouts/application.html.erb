@@ -23,10 +23,11 @@
 
   <body>
     <nav>
-      <%= link_to "Home", root_path %>
+      <%= link_to "Transactions", transactions_path(date: @date) %>
+      <%= link_to "Share", share_transactions_path(date: @date) %>
     </nav>
     <main>
-      <%= yield %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
   </body>
 </html>
