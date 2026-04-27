@@ -1,0 +1,30 @@
+<% content_for :content do %>
+<nav>
+  <ul class="pagination">
+    <li class="page-item">
+      <%= link_to '<<', url_for(date: @date.beginning_of_week.yesterday), class: 'page-link' %>
+    </li>
+    <% (@date.beginning_of_week..@date.end_of_week).each do |day| %>
+      <% if day == @date %>
+        <li class="page-item active">
+      <% elsif day >= Date.today %>
+        <li class="page-item disabled">
+      <% else %>
+        <li class="page-item">
+      <% end %>
+        <%= link_to time_tag(day, l(day, format: :long)), url_for(date: day), class: 'page-link' %>
+      </li>
+    <% end %>
+    <% if @date.end_of_week.tomorrow <= Date.today %>
+      <li class="page-item">
+        <%= link_to '>>', url_for(date: @date.end_of_week.tomorrow), class: 'page-link' %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+
+<h1><%= time_tag @date, l(@date, format: :long) %></h1>
+<%= yield %>
+<% end %>
+
+<%= render template: "layouts/application" %>
