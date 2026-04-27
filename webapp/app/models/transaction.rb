@@ -7,7 +7,8 @@ class Transaction < ApplicationRecord
   scope :today, -> { at_date(Time.zone.today) }
 
   def workers
-    Worktime.at_time(timestamp)
+    w = Worktime.at_time(timestamp)
+    w.any? ? w : [Worktime.new(name: "Nobody", start_time: timestamp, end_time: timestamp)]
   end
 
   def share
